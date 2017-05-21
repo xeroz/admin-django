@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Admin</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <!-- FONT AWESOME-->
+    <link rel="stylesheet" href="{% static 'css/fontawesome/css/font-awesome.min.css' %}">
+    <!-- SIMPLE LINE ICONS-->
+    <link rel="stylesheet" href="{% static 'css/simple-line-icons/css/simple-line-icons.css' %}">
+    <!-- ANIMATE.CSS-->
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <!-- WHIRL (spinners)-->
+    <link rel="stylesheet" href="{% static 'css/whirl.css' %}">
+    <!-- =============== PAGE VENDOR STYLES ===============-->
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" id="bscss">
+    <!-- =============== APP STYLES ===============-->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" id="maincss">
+    <link id="autoloaded-stylesheet" rel="stylesheet" href="{% static 'css/theme-e.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- top navbar-->
+        <header class="topnavbar-wrapper">
+            <!-- START Top Navbar-->
+            <nav role="navigation" class="navbar topnavbar">
+                {% include 'layouts/admin/topbar.html' %}
+            </nav>
+            <!-- END Top Navbar-->
+        </header>
+        <!-- sidebar-->
+        <aside class="aside">
+            <!-- START Sidebar (left)-->
+            <div class="aside-inner">
+                <nav data-sidebar-anyclick-close="" class="sidebar">
+                    <!-- START sidebar nav-->
+                    <ul class="nav">
+                        {% include 'layouts/admin/navbar.html' %}
+                    </ul>
+                    <!-- END sidebar nav-->
+                </nav>
+            </div>
+            <!-- END Sidebar (left)-->
+        </aside>
+        <!-- Main section-->
+        <section>
+            <!-- Page content-->
+            <div class="content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
+        </section>
+        <!-- Page footer-->
+        <footer>
+            <span>&copy; 2016 - Angle</span>
+        </footer>
+    </div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <!-- MODERNIZR-->
+    <script src="{% static 'js/modernizr.custom.js' %}"></script>
+    <!-- JQUERY-->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <!-- BOOTSTRAP-->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- STORAGE API-->
+    <script src="{% static 'js/jquery.storageapi.js' %}"></script>
+    <!-- JQUERY EASING-->
+    <script src="{% static 'js/jquery.easing.js' %}"></script>
+    <!-- ANIMO-->
+    <script src="{% static 'js/animo.js' %}"></script>
+    <!-- SLIMSCROLL-->
+    <script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <!-- =============== APP SCRIPTS ===============-->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

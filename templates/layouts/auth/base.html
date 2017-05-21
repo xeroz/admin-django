@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Bootstrap Admin App + jQuery">
+    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+    <title>Angle - Bootstrap Admin Template</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <!-- FONT AWESOME-->
+    <link rel="stylesheet" href="{% static 'css/fontawesome/css/font-awesome.min.css' %}">
+    <!-- SIMPLE LINE ICONS-->
+    <link rel="stylesheet" href="{% static 'simple-line-icons/css/simple-line-icons.css' %}">
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" id="bscss">
+    <!-- =============== APP STYLES ===============-->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" id="maincss">
+</head>
+
+<body>
+    <div class="wrapper">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <!-- MODERNIZR-->
+    <script src="{% static 'js/modernizr.custom.js' %}"></script>
+    <!-- JQUERY-->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <!-- BOOTSTRAP-->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- STORAGE API-->
+    <script src="{% static 'js/jquery.storageapi.js' %}"></script>
+    <!-- PARSLEY-->
+    <script src="{% static 'js/parsley.min.js' %}"></script>
+    <!-- =============== APP SCRIPTS ===============-->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
