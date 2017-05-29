@@ -17,14 +17,12 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from apps.accounts import views
-from apps.home import views
+from django.contrib.auth.views import login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^$', views.login, name='login'),
-    url(r'^home/', views.home, name='home'),
-    # url(r'^', include('accounts.urls')),
+    url(r'^$', login, {'template_name':'login.html'}, name='login'),
+    url(r'^', include('apps.home.urls')),
 ]
 
 if settings.DEBUG:
