@@ -3,8 +3,14 @@
     <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
 </li>
 <li class=" ">
-    <a href="widgets.html" title="Widgets">
-        <em class="icon-grid"></em>
-        <span data-localize="sidebar.nav.WIDGETS">Home</span>
+    <!--home-->
+    <a href="{% url 'home' %}" title="Profile">
+        <em class="icon-user"></em>
+        <span data-localize="sidebar.nav.WIDGETS">Profile</span>
+    </a>
+    <!--users-->
+    <a href="{% url 'users:index' %}" title="Users">
+        <em class="icon-people"></em>
+        <span data-localize="sidebar.nav.WIDGETS">Users</span>
     </a>
 </li>
