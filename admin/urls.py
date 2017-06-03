@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', login, {'template_name':'auth/login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/'}, name= 'logout'),
     url(r'^', include('apps.home.urls')),
+    url(r'^users/', include('apps.users.urls', namespace='users')),
 ]
 
 if settings.DEBUG:
