@@ -15,6 +15,3 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 post_save.connect(create_profile, sender=User)
-
-def edit_profile(sender, **kwargs):
-    pass
