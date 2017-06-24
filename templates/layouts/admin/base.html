@@ -15,6 +15,7 @@
     <!-- WHIRL (spinners)-->
     <link rel="stylesheet" href="{% static 'css/whirl.css' %}">
     <!-- =============== PAGE VENDOR STYLES ===============-->
+    {% block extra-css %}{% endblock %}
     <!-- =============== BOOTSTRAP STYLES ===============-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" id="bscss">
     <!-- =============== APP STYLES ===============-->
@@ -73,6 +74,7 @@
     <!-- SLIMSCROLL-->
     <script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    {% block extra-js %}{% endblock %}
     <!-- =============== APP SCRIPTS ===============-->
     <script src="{% static 'js/app.js' %}"></script>
 </body>
