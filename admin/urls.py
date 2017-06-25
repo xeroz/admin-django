@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('apps.home.urls')),
     url(r'^users/', include('apps.users.urls', namespace='users')),
     url(r'^teams/', include('apps.teams.urls', namespace='teams')),
+    url(r'^players/', include('apps.players.urls', namespace='players')),
 ]
 
 if settings.DEBUG:
