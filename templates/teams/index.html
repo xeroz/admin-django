@@ -15,6 +15,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Foundation</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,15 +25,15 @@
                                 <td>{{ team.name }}</td>
                                 <td>{{ team.foundation }}</td>
                                 <td>
-                                    <!--<a href="{% url 'users:edit' user.id %}" class="btn btn-square btn-default">Edit</a>
-                                    <a href="{% url 'users:delete' user.id %}" class="btn btn-square btn-danger">Delete</a>-->
+                                    <a href="{% url 'teams:edit' team.id %}" class="btn btn-square btn-default">Edit</a>
+                                    <a href="{% url 'teams:delete' team.id %}" class="btn btn-square btn-danger">Delete</a>
                                 </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                     <div class="">
-                        <a href="{% url 'teams:create' %}" class="btn btn-square btn-primary">New User</a>
+                        <a href="{% url 'teams:create' %}" class="btn btn-square btn-primary">New Team</a>
                     </div>
                 </div>
             </div>
