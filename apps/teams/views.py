@@ -18,10 +18,28 @@ def create(request):
         form = TeamForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/users/index')
+            return HttpResponseRedirect('/teams/index')
     else:
         form = TeamForm()
         data = {'form': form}
         return render(request, 'teams/create.html', data)
 
-    # return render(request, 'teams/create.html', {})
+def edit(request, id):
+
+    team = get_object_or_404(Team, id = id)
+
+    if request.method == 'POST':
+        form = TeamForm(request.POST, instance = team)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/teams/index')
+    else:
+        form = TeamForm(instance = team)
+        data = {'form': form}
+        return render(request, 'teams/edit.html', data)
+
+def delete(render, id):
+    team = get_object_or_404(Team, id = id)
+    team.delete()
+
+    return HttpResponseRedirect('/teams/index')
