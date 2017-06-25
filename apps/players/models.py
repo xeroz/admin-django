@@ -5,6 +5,6 @@ from apps.teams.models import Team
 class Player(models.Model):
     name     = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    integer  = models.IntegerField()
+    number   = models.IntegerField()
     position = models.CharField(max_length=100)
-    player   = models.ForeignKey(Team, null=True, blank=True ,on_delete=models.CASCADE)
+    team     = models.ForeignKey(Team, null=True, blank=True ,on_delete=models.CASCADE)
