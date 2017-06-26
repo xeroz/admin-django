@@ -9,7 +9,8 @@ class PlayerForm(forms.ModelForm):
             'lastname',
             'number',
             'position',
-            'team',)
+            'team',
+            'image',)
 
         labels = {
             'name' : 'Name',
@@ -17,6 +18,7 @@ class PlayerForm(forms.ModelForm):
             'number' : 'Number',
             'position' : 'Position',
             'team' : 'Team',
+            'image': 'Image',
         }
 
         widgets = {
@@ -25,4 +27,7 @@ class PlayerForm(forms.ModelForm):
             'number' : forms.TextInput(attrs={'class':'form-control'}),
             'position' : forms.TextInput(attrs={'class':'form-control'}),
             'team' : forms.Select(attrs={'class':'form-control'}),
+            'image' : forms.FileInput(attrs={'class':'form-control filestyle',
+                                             'data-classinput':'form-control inline',
+                                             'data-classbutton':'btn btn-default'}),
         }

@@ -8,3 +8,10 @@ class Player(models.Model):
     number   = models.IntegerField()
     position = models.CharField(max_length=100)
     team     = models.ForeignKey(Team, null=True, blank=True ,on_delete=models.CASCADE)
+    image    = models.ImageField(upload_to='player_image', blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name

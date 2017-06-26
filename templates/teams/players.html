@@ -1,0 +1,33 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block content %}
+<h3>{{ team.name }}
+    <small>Subtitle</small>
+</h3>
+<div class="row">
+    {% for player in players %}
+    <div class="col-md-4">
+        <div class="panel widget">
+            <div class="row row-table row-flush">
+                <div class="col-xs-5">
+                    <picture class="lateral-picture">
+                        {% if player.image %}
+                        <img src="{{ player.image.url }}" alt="">
+                        {% endif %}
+                    </picture>
+                </div>
+                <div class="col-xs-7 align-middle p-lg">
+                    <div class="pull-right"><a href="#" ><span class="label label-primary pull-right"><h4>{{ player.number }}</h4></span></a>
+                    </div>
+                    <p>
+                        <h3>{{ player.name }} {{ player.lastname }}</h3>
+                        <strong>{{ player.position }}</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^create/', login_required(views.create), name = 'create'),
     url(r'^edit/(?P<id>\w+)/$', login_required(views.edit), name = 'edit'),
     url(r'^delete/(?P<id>\w+)/$', login_required(views.delete), name = 'delete'),
+    url(r'^players/(?P<id>\w+)/$', login_required(views.players), name = 'players'),
 ]

@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from apps.teams.forms import TeamForm
 from apps.teams.models import Team
+from apps.players.models import Player
 
 # Create your views here.
 def index(request):
@@ -43,3 +44,15 @@ def delete(render, id):
     team.delete()
 
     return HttpResponseRedirect('/teams/index')
+
+def players(request, id):
+
+    players = Player.objects.filter(team = id)
+    team    = get_object_or_404(Team, id = id)
+
+    if request.method == 'GET':
+        data = {
+            'players': players,
+            'team': team,
+            }
+        return render(request, 'teams/players.html', data)

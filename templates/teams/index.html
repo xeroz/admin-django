@@ -25,6 +25,7 @@
                                 <td>{{ team.name }}</td>
                                 <td>{{ team.foundation }}</td>
                                 <td>
+                                    <a href="{% url 'teams:players' team.id %}" class="btn btn-square btn-default">Players</a>
                                     <a href="{% url 'teams:edit' team.id %}" class="btn btn-square btn-default">Edit</a>
                                     <a href="{% url 'teams:delete' team.id %}" class="btn btn-square btn-danger">Delete</a>
                                 </td>
