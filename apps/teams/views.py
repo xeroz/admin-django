@@ -58,9 +58,8 @@ def players(request, id):
         return render(request, 'teams/players.html', data)
 
 def stadium(request, id):
-    stadium = Stadium.objects.filter(id = id)
+    stadium = get_object_or_404(Stadium, id = id)
 
-    print(stadium)
     if request.method == 'GET':
         data = {
             'stadium': stadium,
