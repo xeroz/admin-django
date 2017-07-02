@@ -1,5 +1,6 @@
 from django import forms
 from apps.players.models import Player
+from django_countries.widgets import CountrySelectWidget
 
 class PlayerForm(forms.ModelForm):
     class Meta:
@@ -10,7 +11,8 @@ class PlayerForm(forms.ModelForm):
             'number',
             'position',
             'team',
-            'image',)
+            'image',
+            'country',)
 
         labels = {
             'name' : 'Name',
@@ -19,6 +21,7 @@ class PlayerForm(forms.ModelForm):
             'position' : 'Position',
             'team' : 'Team',
             'image': 'Image',
+            'country': 'Country',
         }
 
         widgets = {
@@ -27,6 +30,7 @@ class PlayerForm(forms.ModelForm):
             'number' : forms.TextInput(attrs={'class':'form-control'}),
             'position' : forms.TextInput(attrs={'class':'form-control'}),
             'team' : forms.Select(attrs={'class':'form-control'}),
+            'country' : CountrySelectWidget(attrs={'class':'form-control', 'id': 'select2-1'}),
             'image' : forms.FileInput(attrs={'class':'form-control filestyle',
                                              'data-classinput':'form-control inline',
                                              'data-classbutton':'btn btn-default'}),
