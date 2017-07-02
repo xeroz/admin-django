@@ -1,9 +1,15 @@
 {% extends 'layouts/admin/base.html' %}
 
 {% block content %}
-<h3>{{ team.name }}
-    <small>Subtitle</small>
-</h3>
+<div class="content-heading">
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a type="button" href="{% url 'teams:index' %}" class="mb-sm btn btn-success btn-outline btn-square">Back</a>
+    </div>
+    <!-- END Language list    -->
+    {{ team.name }}
+    <small data-localize="dashboard.WELCOME"></small>
+</div>
 <div class="row">
     {% for player in players %}
     <div class="col-md-4">

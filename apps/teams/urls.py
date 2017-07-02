@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^edit/(?P<id>\w+)/$', login_required(views.edit), name = 'edit'),
     url(r'^delete/(?P<id>\w+)/$', login_required(views.delete), name = 'delete'),
     url(r'^players/(?P<id>\w+)/$', login_required(views.players), name = 'players'),
+    url(r'^stadium/(?P<id>\w+)/$', login_required(views.stadium), name = 'stadium'),
 ]

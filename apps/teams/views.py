@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from apps.teams.forms import TeamForm
-from apps.teams.models import Team
+from apps.teams.models import Team, Stadium
 from apps.players.models import Player
 
 # Create your views here.
@@ -54,5 +54,15 @@ def players(request, id):
         data = {
             'players': players,
             'team': team,
-            }
+        }
         return render(request, 'teams/players.html', data)
+
+def stadium(request, id):
+    stadium = Stadium.objects.filter(id = id)
+
+    print(stadium)
+    if request.method == 'GET':
+        data = {
+            'stadium': stadium,
+        }
+        return render(request, 'teams/stadium.html', data)

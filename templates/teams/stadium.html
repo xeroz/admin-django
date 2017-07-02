@@ -1,0 +1,66 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block content %}
+<div class="content-heading">
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a type="button" href="{% url 'teams:index' %}" class="mb-sm btn btn-success btn-outline btn-square">Back</a>
+    </div>
+    <!-- END Language list    -->
+    Stadium
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {% if stadium.image %}
+            <img src="{{ stadium.image.url }}" class="img-responsive" style="height: 600px; width: 100%">
+        {% endif %}
+    </div>
+    <div class="col-lg-4">
+        <!-- START widget-->
+        <div class="panel widget">
+            <div class="row row-table row-flush">
+                <div class="col-xs-4 bg-info text-center">
+                    <em class="fa fa-users fa-2x"></em>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                        <h4 class="mt0">{{ stadium.name }}</h4>
+                        <p class="mb0 text-muted">STADIUM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END widget-->
+        <!-- START widget-->
+        <div class="panel widget">
+            <div class="row row-table row-flush">
+                <div class="col-xs-4 bg-info text-center">
+                    <em class="fa fa-users fa-2x"></em>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                        <h4 class="mt0">{{ stadium.team.name }}</h4>
+                        <p class="mb0 text-muted">TEAM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END widget-->
+        <!-- START widget-->
+        <div class="panel widget">
+            <div class="row row-table row-flush">
+                <div class="col-xs-4 bg-info text-center">
+                    <em class="fa fa-users fa-2x"></em>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel-body text-center">
+                        <h4 class="mt0">{{ stadium.capacity }}</h4>
+                        <p class="mb0 text-muted">CAPACITY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END widget-->
+    </div>
+</div>
+{% endblock %}
