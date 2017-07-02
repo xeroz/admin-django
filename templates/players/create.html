@@ -2,14 +2,27 @@
 
 {% load staticfiles %}
 
+{% load staticfiles %}
+
+{% block extra-css %}
+    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2-bootstrap.css' %}">
+{% endblock %}
+
 {% block extra-js %}
     <script src="{% static 'js/filestyle.js' %}"></script>
+    <script src="{% static 'js/select2.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<h3>New User
-    <small></small>
-</h3>
+<div class="content-heading">
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a type="button" href="{% url 'players:index' %}" class="mb-sm btn btn-success btn-outline btn-square">Back</a>
+    </div>
+    <!-- END Language list    -->
+    New Player
+</div>
 <div class="row">
     <div class="col-lg-6">
         <!-- START panel-->
@@ -38,10 +51,14 @@
                         {{ form.team }}
                     </div>
                     <div class="form-group">
+                        <label>{{ form.country.label }}</label>
+                        {{ form.country }}
+                    </div>
+                    <div class="form-group">
                         <label>{{ form.image.label }}</label>
                         {{ form.image }}
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                    <button type="submit" class="btn btn-sm btn-primary btn-square">Save</button>
                 </form>
             </div>
         </div>

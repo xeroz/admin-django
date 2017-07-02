@@ -1,7 +1,7 @@
 {% extends 'layouts/admin/base.html' %}
 
 {% block content %}
-<h3>Page title
+<h3>Players
     <small>Subtitle</small>
 </h3>
 <div class="row">
@@ -16,6 +16,7 @@
                                 <th>Name</th>
                                 <th>Lastname</th>
                                 <th>Number</th>
+                                <th>Country</th>
                                 <th>Position</th>
                                 <th>Team</th>
                                 <th>Actions</th>
@@ -28,6 +29,7 @@
                                 <td>{{ player.name }}</td>
                                 <td>{{ player.lastname }}</td>
                                 <td>{{ player.number }}</td>
+                                <td>{{ player.country.name }}</td>
                                 <td>{{ player.position }}</td>
                                 <td>{{ player.team }}</td>
                                 <td>
