@@ -6,7 +6,7 @@ from apps.players.models import Player
 def index(request):
 
     players = Player.objects.all()
-    print(players)
+
     data = {
         'players': players,
     }
@@ -15,7 +15,7 @@ def index(request):
 def create(request):
 
     if request.method == 'POST':
-        form = PlayerForm(request.POST)
+        form = PlayerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/players/index')
@@ -29,7 +29,7 @@ def edit(request, id):
     player = get_object_or_404(Player, id = id)
 
     if request.method == 'POST':
-        form = PlayerForm(request.POST, instance = player)
+        form = PlayerForm(request.POST, request.FILES, instance = player)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/players/index')

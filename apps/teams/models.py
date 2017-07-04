@@ -1,11 +1,12 @@
 from django.db import models
-from apps.competitions.models import Competition
+from django_countries.fields import CountryField
 
 # Create your models here.
 class Team(models.Model):
     name        = models.CharField(max_length=50, default='')
     foundation  = models.DateField()
-    competition = models.ManyToManyField(Competition)
+    image       = models.ImageField(upload_to='team_image', blank=True)
+    country     = CountryField(blank_label='select country', null=True)
 
     def __str__(self):
         return self.name
