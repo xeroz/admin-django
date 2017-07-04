@@ -1,0 +1,41 @@
+{% extends 'layouts/admin/base.html' %}
+
+{% block content %}
+<div class="content-heading">
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a type="button" href="{% url 'competitions:create' %}" class="mb-sm btn btn-primary btn-outline btn-square">New Competition</a>
+    </div>
+    <!-- END Language list    -->
+    Competitions
+</div>
+<div class="row">
+    {% for competition in competitions %}
+    <div class="col-md-3">
+        <!-- START widget-->
+        <div class="panel widget">
+            {% if competition.image %}
+            <img src="{{ competition.image.url }}" alt="Image" class="img-responsive" style="width: 100%; height: 300px">
+            {% endif %}
+            <div class="panel-body">
+            <div class="row row-table text-center">
+                <div class="col-xs-4">
+                    <p>Teams</p>
+                    <h3 class="m0 text-primary">700</h3>
+                </div>
+                <div class="col-xs-4">
+                    <p>Tables</p>
+                    <h3 class="m0 text-primary">1500</h3>
+                </div>
+                <div class="col-xs-4">
+                    <p>Statistics</p>
+                    <h3 class="m0 text-primary">300</h3>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- END widget-->
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

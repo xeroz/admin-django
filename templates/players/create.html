@@ -2,7 +2,6 @@
 
 {% load staticfiles %}
 
-{% load staticfiles %}
 
 {% block extra-css %}
     <link rel="stylesheet" href="{% static 'css/select2.css' %}">
@@ -28,7 +27,7 @@
         <!-- START panel-->
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" method="POST">
+                <form role="form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label>{{ form.name.label }}</label>
