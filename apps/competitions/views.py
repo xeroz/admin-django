@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from apps.competitions.models import Competition
 from apps.competitions.forms import CompetitionForm
+from django.views.generic import ListView
 
 # Create your views here.
 def index(request):
@@ -22,3 +23,8 @@ def create(request):
         form = CompetitionForm()
         data = {'form': form}
         return render(request, 'competitions/create.html', data)
+
+class IndexView(ListView):
+    model = Competition
+    template_name = 'competitions/index.html'
+        

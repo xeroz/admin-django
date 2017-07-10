@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from apps.players.forms import PlayerForm
 from apps.players.models import Player
+from django.views.generic import ListView
 
 # Create your views here.
 def index(request):
@@ -11,6 +12,10 @@ def index(request):
         'players': players,
     }
     return render(request, 'players/index.html', data)
+
+class IndexView(ListView):
+    model = Player
+    template_name = 'players/index.html'
 
 def create(request):
 

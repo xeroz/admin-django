@@ -18,4 +18,10 @@ class Stadium(models.Model):
     name     = models.CharField(max_length=50, default='')
     image    = models.ImageField(upload_to='stadium_image', blank=True)
     capacity = models.IntegerField(default=10)
-    team     = models.OneToOneField(Team)
+    team     = models.OneToOneField(Team, related_name='team_stadium')
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name

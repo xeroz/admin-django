@@ -1,49 +1,73 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from apps.teams.forms import TeamForm
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect
+from django.core.urlresolvers import reverse_lazy
+from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
-def index(request):
+class IndexView(ListView):
+    model = Team
+    template_name = 'teams/index.html'
 
-    teams = Team.objects.all()
+class CreateView(CreateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'teams/create.html'
+    success_url = reverse_lazy('teams:index')
 
-    data = {
-        'teams': teams,
-    }
-    return render(request, 'teams/index.html', data)
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+        context['form_stadium'] = form_stadium
+        return context
 
-def create(request):
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        form_stadium = StadiumForm(request.POST, request.FILES)
+        if form.is_valid() and form_stadium.is_valid():
+            return self.form_valid(form, form_stadium)
+        else:
+            return self.form_invalid(form)
 
-    if request.method == 'POST':
-        form = TeamForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/teams/index')
-    else:
-        form = TeamForm()
-        data = {'form': form}
-        return render(request, 'teams/create.html', data)
+    def form_valid(self, form, form_stadium):
+        self.team = form.save()
+        form_stadium.instance.team = self.team
+        form_stadium.save()
+        return super(CreateView, self).form_valid(form)
 
-def edit(request, id):
+class EditView(UpdateView):
+    modal = Team
+    form_class = TeamForm
+    template_name = 'teams/edit.html'
+    success_url = reverse_lazy('teams:index')
+    queryset = Team.objects.all()
 
-    team = get_object_or_404(Team, id = id)
+    def get_context_data(self, **kwargs):
+        context = super(EditView, self).get_context_data(**kwargs)
+        stadium = self.get_object().team_stadium
+        form_stadium = StadiumForm(instance = stadium)
+        context['form_stadium'] = form_stadium
+        return context
 
-    if request.method == 'POST':
-        form = TeamForm(request.POST, instance = team)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/teams/index')
-    else:
-        form = TeamForm(instance = team)
-        data = {'form': form}
-        return render(request, 'teams/edit.html', data)
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        stadium = self.get_object().team_stadium
+        form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium)
+        if form.is_valid() and form_stadium.is_valid():
+            return self.form_valid(form, form_stadium)
+        else:
+            return self.form_invalid(form)
 
-def delete(render, id):
-    team = get_object_or_404(Team, id = id)
-    team.delete()
+    def form_valid(self, form, form_stadium):
+        self.team = form.save()
+        form_stadium.instance.team = self.team
+        form_stadium.save()
+        return super(EditView, self).form_valid(form)
 
-    return HttpResponseRedirect('/teams/index')
+class DeleteView(DeleteView):
+    modal = Team
+    success_url = reverse_lazy('teams:index')
+    queryset = Team.objects.all()
 
 def players(request, id):
 

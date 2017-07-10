@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block extra-js %}
+    <script src="{% static 'js/filestyle.js' %}"></script>
     <script src="{% static 'js/moment.js' %}"></script>
     <script src="{% static 'js/datetimepicker.min.js' %}"></script>
     <script type="text/javascript">
@@ -23,16 +24,14 @@
     <small></small>
 </h3>
 <div class="row">
-    <div class="col-lg-6">
         <!-- START panel-->
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" method="POST">
+                <form role="form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div class="col-lg-6">
                     <div class="form-group">
-                        {% if form %}
-                            {{ form.name.errors }}
-                        {% endif %}
+                        {{ form.errors }}
                         <label>{{ form.name.label }}</label>
                         {{ form.name }}
                     </div>
@@ -47,6 +46,22 @@
                                 <span class="fa fa-calendar"></span>
                             </span>
                         </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                    {{  form_stadium.errors}}
+                    <div class="form-group">
+                        <label>{{ form_stadium.name.label }}</label>
+                        {{ form_stadium.name }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_stadium.capacity.label }}</label>
+                        {{ form_stadium.capacity }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_stadium.image.label }}</label>
+                        {{ form_stadium.image }}
+                    </div>
                     </div>
                     <button type="submit" class="btn btn-sm btn-primary">Save</button>
                 </form>
