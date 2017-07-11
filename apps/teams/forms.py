@@ -19,10 +19,11 @@ class TeamForm(forms.ModelForm):
 class StadiumForm(forms.ModelForm):
     class Meta:
         model = Stadium
+        prefix = 'stadium'
         fields = ('name', 'image', 'capacity',)
 
         labels = {
-            'name': 'Name',
+            'name': 'Name Stadium',
             'image': 'Image',
             'capacity': 'Capacity',
         }

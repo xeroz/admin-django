@@ -18,6 +18,7 @@ class CreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CreateView, self).get_context_data(**kwargs)
+        form_stadium = StadiumForm
         context['form_stadium'] = form_stadium
         return context
 
@@ -45,24 +46,26 @@ class EditView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditView, self).get_context_data(**kwargs)
         stadium = self.get_object().team_stadium
-        form_stadium = StadiumForm(instance = stadium)
+        form_stadium = StadiumForm(instance = stadium, prefix='stadium')
         context['form_stadium'] = form_stadium
         return context
 
     def post(self, request, *args, **kwargs):
-        form = self.get_form()
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
         stadium = self.get_object().team_stadium
-        form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium)
+        form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium, prefix='stadium')
         if form.is_valid() and form_stadium.is_valid():
             return self.form_valid(form, form_stadium)
         else:
             return self.form_invalid(form)
 
     def form_valid(self, form, form_stadium):
-        self.team = form.save()
-        form_stadium.instance.team = self.team
+        self.object = form.save()
         form_stadium.save()
-        return super(EditView, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+
 
 class DeleteView(DeleteView):
     modal = Team
