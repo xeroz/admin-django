@@ -1,9 +1,14 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views import View
+from django.core import serializers
+from django.http import HttpResponse
+import json
 from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
 
 # Create your views here.
 class IndexView(ListView):
@@ -65,30 +70,45 @@ class EditView(UpdateView):
         form_stadium.save()
         return HttpResponseRedirect(self.get_success_url())
 
-
-
 class DeleteView(DeleteView):
     modal = Team
     success_url = reverse_lazy('teams:index')
     queryset = Team.objects.all()
 
-def players(request, id):
+class Players(View):
+    template_name = 'teams/players.html'
 
-    players = Player.objects.filter(team = id)
-    team    = get_object_or_404(Team, id = id)
-
-    if request.method == 'GET':
+    def get(self, request, pk):
+        players = Player.objects.filter(team__pk = pk)
+        team    = get_object_or_404(Team, id = pk)        
+        print(players)
         data = {
             'players': players,
             'team': team,
         }
-        return render(request, 'teams/players.html', data)
 
-def stadium(request, id):
-    stadium = get_object_or_404(Stadium, id = id)
+        return render(request, self.template_name, data)
 
-    if request.method == 'GET':
+class Stadiu(View):
+    template_name = 'teams/stadium.html'
+    model = Stadium
+
+    def get(self, request, pk):    
+        stadium = Stadium.objects.get(team__pk = pk)
+        print(stadium)
+
         data = {
             'stadium': stadium,
         }
-        return render(request, 'teams/stadium.html', data)
+        return render(request, self.template_name, data)
+
+def fbview(request):
+    return HttpResponse(serializers.serialize('json', Stadium.objects.all()), content_type="application/json")
+
+def get_players_by_country(request):
+    country = request.GET.get('country')
+    team_id = request.GET.get('team_id')
+
+    players = Player.objects.filter(country=country).filter(team=team_id)
+
+    return HttpResponse(serializers.serialize('json', players), content_type="application/json")

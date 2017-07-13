@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.players',
     'apps.competitions',
     'django_countries',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
