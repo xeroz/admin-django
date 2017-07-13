@@ -3,10 +3,10 @@ from django_countries.fields import CountryField
 
 # Create your models here.
 class Team(models.Model):
-    name        = models.CharField(max_length=50, default='')
-    foundation  = models.DateField()
-    image       = models.ImageField(upload_to='team_image', blank=True)
-    country     = CountryField(blank_label='select country', null=True)
+    name = models.CharField(max_length=50, default='')
+    foundation = models.DateField()
+    image = models.ImageField(upload_to='team_image', blank=True)
+    country = CountryField(blank_label='select country', null=True)
 
     def __str__(self):
         return self.name
@@ -15,10 +15,10 @@ class Team(models.Model):
         return self.name
 
 class Stadium(models.Model):
-    name     = models.CharField(max_length=50, default='')
-    image    = models.ImageField(upload_to='stadium_image', blank=True)
+    name = models.CharField(max_length=50, default='')
+    image = models.ImageField(upload_to='stadium_image', blank=True)
     capacity = models.IntegerField(default=10)
-    team     = models.OneToOneField(Team, related_name='team_stadium')
+    team = models.OneToOneField(Team, related_name='team_stadium')
 
     def __str__(self):
         return self.name

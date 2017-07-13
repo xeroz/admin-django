@@ -1,51 +1,72 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from apps.players.forms import PlayerForm
-from apps.players.models import Player
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
+from apps.players.forms import PlayerForm, StatisticForm
+from apps.players.models import Player, Statistics
 
 # Create your views here.
-def index(request):
-
-    players = Player.objects.all()
-
-    data = {
-        'players': players,
-    }
-    return render(request, 'players/index.html', data)
-
-class IndexView(ListView):
+class Index(ListView):
     model = Player
     template_name = 'players/index.html'
 
-def create(request):
+class Create(CreateView):
+    model = Player
+    form_class = PlayerForm
+    template_name = 'players/create.html'
+    success_url = reverse_lazy('players:index')
 
-    if request.method == 'POST':
-        form = PlayerForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/players/index')
-    else:
-        form = PlayerForm()
-        data = {'form': form}
-        return render(request, 'players/create.html', data)
+    def get_context_data(self, **kwargs):
+        context = super(Create, self).get_context_data(**kwargs)
+        form_statistic = StatisticForm
+        context['form_statistic'] = form_statistic
+        return context
 
-def edit(request, id):
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        form_statistic = StatisticForm(request.POST)
+        if form.is_valid() and form_statistic.is_valid():
+            return self.form_valid(form, form_statistic)
+        else:
+            return self.form_invalid(form)
 
-    player = get_object_or_404(Player, id = id)
+    def form_valid(self, form, form_statistic):
+        self.player = form.save()
+        form_statistic.instance.player = self.player
+        form_statistic.save()
+        return super(Create, self).form_valid(form)
 
-    if request.method == 'POST':
-        form = PlayerForm(request.POST, request.FILES, instance = player)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/players/index')
-    else:
-        form = PlayerForm(instance = player)
-        data = {'form': form}
-        return render(request, 'players/edit.html', data)
+class Edit(UpdateView):
+    model = Player
+    form_class = PlayerForm
+    template_name = 'players/edit.html'
+    success_url = reverse_lazy('players:index')
 
-def delete(render, id):
+    def get_context_data(self, **kwargs):
+        context = super(Edit, self).get_context_data(**kwargs)
+        statistic = self.get_object().player_statistic
+        form_statistic = StatisticForm(instance=statistic)
+        context['form_statistic'] = form_statistic
+        return context
 
-    player = get_object_or_404(Player, id = id)
-    player.delete()
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, request.FILES, instance=self.object)
+        statistic = self.get_object().player_statistic
+        form_statistic = StatisticForm(request.POST, instance=statistic)
+        if form.is_valid() and form_statistic.is_valid():
+            return self.form_valid(form, form_statistic)
+        else:
+            return self.form_invalid(form)
 
-    return HttpResponseRedirect('/players/index')
+    def form_valid(self, form, form_statistic):
+        self.object = form.save()
+        form_statistic.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+class Delete(DeleteView):
+    model = Player
+    success_url = reverse_lazy('players:index')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)

@@ -4,7 +4,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views import View
 from django.core import serializers
 from django.http import HttpResponse
+
 import json
+
 from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player
