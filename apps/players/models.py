@@ -17,3 +17,12 @@ class Player(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Statistics(models.Model):
+    pace = models.IntegerField()
+    shooting = models.IntegerField()
+    passing = models.IntegerField()
+    dribbling = models.IntegerField()
+    defending = models.IntegerField()
+    physical = models.IntegerField()
+    player = models.OneToOneField(Player, related_name='player_statistic')
