@@ -3,7 +3,8 @@
 {% load staticfiles %}
 
 {% block extra-js %}
-    <script src="{% static 'js/Chart.js' %}"></script>
+     <script src="{% static 'js/backend/teams/players.js' %}"></script>
+    <!-- <script src="{% static 'js/Chart.js' %}"></script> -->
 {% endblock %}
 
 {% block content %}
@@ -14,9 +15,18 @@
     </div>
     <!-- END Language list    -->
     {{ team.name }}
+    <input type="hidden" id="team_id" value="{{ team.id }}">
+    <div class="form-group">
+        <select class="form-control m-b" name="country" id="country">
+            <option value="">------------</option>
+            {% for player in players %}
+            <option value="{{ player.country }}">{{ player.country.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <small data-localize="dashboard.WELCOME"></small>
 </div>
-<div class="row">
+<div class="row" id="row">
     {% for player in players %}
     <div class="col-md-4">
         <div class="panel widget">
