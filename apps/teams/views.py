@@ -1,50 +1,83 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player
 
 # Create your views here.
-def index(request):
+class ListTeams(ListView):
+    model = Team
+    template_name = 'teams/index.html'
 
-    teams = Team.objects.all()
+class CreateTeam(CreateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'teams/create.html'
+    success_url = reverse_lazy('teams:list')
 
-    data = {
-        'teams': teams,
-    }
-    return render(request, 'teams/index.html', data)
+    def get_context_data(self, **kwargs):
+        context = super(CreateTeam, self).get_context_data(**kwargs)
+        form_stadium = StadiumForm
+        context['form_stadium'] = form_stadium
+        return context
 
-def create(request):
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = self.get_form()
+        form_stadium = StadiumForm(request.POST, request.FILES)
+        if form.is_valid() and form_stadium.is_valid():
+            return self.form_valid(form, form_stadium)
+        else:
+            return self.form_invalid(form, form_stadium)
 
-    teamform = TeamForm()
-    stadiumform = StadiumForm()
+    def form_valid(self, form, form_stadium):
+        self.team = form.save()
+        form_stadium.instance.team = self.team
+        form_stadium.save()
+        return super(CreateTeam, self).form_valid(form)
 
-    if request.method == 'POST':
-        form        = TeamForm(request.POST)
-        stadiumform = StadiumForm(request.POST)
-        if form.is_valid() and stadiumform.is_valid():
-            form.save()
-            return HttpResponseRedirect('/teams/index')
+    def form_invalid(self, form, form_stadium):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
-    data = {
-        'teamform': teamform,
-        'stadiumform': stadiumform,
-    }
-    return render(request, 'teams/create.html', data)
+class EditTeam(UpdateView):
+    modal = Team
+    form_class = TeamForm
+    template_name = 'teams/edit.html'
+    success_url = reverse_lazy('teams:list')
+    queryset = Team.objects.all()
 
-def edit(request, id):
+    def get_context_data(self, **kwargs):
+        context = super(EditTeam, self).get_context_data(**kwargs)
+        stadium = self.get_object().team_stadium
+        form_stadium = StadiumForm(instance = stadium, prefix='stadium')
+        context['form_stadium'] = form_stadium
+        return context
 
-    team = get_object_or_404(Team, id = id)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
+        stadium = self.get_object().team_stadium
+        form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium, prefix='stadium')
+        if form.is_valid() and form_stadium.is_valid():
+            return self.form_valid(form, form_stadium)
+        else:
+            return self.form_invalid(form)
 
-    if request.method == 'POST':
-        form = TeamForm(request.POST, instance = team)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/teams/index')
-    else:
-        form = TeamForm(instance = team)
-        data = {'form': form}
-        return render(request, 'teams/edit.html', data)
+    def form_valid(self, form, form_stadium):
+        self.object = form.save()
+        form_stadium.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class DeleteTeam(DeleteView):
+    modal = Team
+    success_url = reverse_lazy('teams:list')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
 
 def delete(render, id):
     team = get_object_or_404(Team, id = id)
@@ -65,7 +98,7 @@ def players(request, id):
         return render(request, 'teams/players.html', data)
 
 def stadium(request, id):
-    stadium = get_object_or_404(Stadium, id = id)
+    stadium = Stadium.objects.get(team__pk = id)
 
     if request.method == 'GET':
         data = {

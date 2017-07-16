@@ -20,49 +20,58 @@
 {% endblock %}
 
 {% block content %}
-<h3>
-    <small></small>
-</h3>
+<div class="content-heading">
+    <!-- START Language list-->
+    <div class="pull-right">
+        <a type="button" href="{% url 'teams:list' %}" class="mb-sm btn btn-success btn-outline btn-square">Back</a>
+    </div>
+    <!-- END Language list    -->
+    New team
+</div>
 <div class="row">
     <div class="col-lg-12">
         <!-- START panel-->
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" method="POST">
+                <form role="form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="col-md-6">
-                        <h3>Team</h3>
+                    <h3>Team</h3>
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label>{{ teamform.name.label }}</label>
-                            {{ teamform.name }}
+                            {{ form.errors }}
+                            <label>{{ form.name.label }}</label>
+                            {{ form.name }}
                         </div>
                         <div class="form-group mb">
-                            <label>{{ teamform.foundation.label }}</label>
+                            {% if form %}
+                                {{ form.foundation.errors }}
+                            {% endif %}
+                            <label>{{ form.foundation.label }}</label>
                             <div id="datetimepicker1" class="input-group date">
-                                {{ teamform.foundation }}
+                                {{ form.foundation }}
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <h3>Stadium</h3>
+                    <div class="col-lg-6">
+                        {{  form_stadium.errors}}
                         <div class="form-group">
-                            <label>{{ stadiumform.name.label }}</label>
-                            {{ stadiumform.name }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ stadiumform.capacity.label }}</label>
-                            {{ stadiumform.capacity }}
+                            <label>{{ form_stadium.name.label }}</label>
+                            {{ form_stadium.name }}
                         </div>
                         <div class="form-group">
-                            <label>{{ stadiumform.image.label }}</label>
-                            {{ stadiumform.image }}
+                            <label>{{ form_stadium.capacity.label }}</label>
+                            {{ form_stadium.capacity }}
                         </div>
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                        <div class="form-group">
+                            <label>{{ form_stadium.image.label }}</label>
+                            {{ form_stadium.image }}
                         </div>
+                    </div>
+                    <div class="pull-left">
+                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
                     </div>
                 </form>
             </div>

@@ -17,19 +17,18 @@ class TeamForm(forms.ModelForm):
         }
 
 class StadiumForm(forms.ModelForm):
+    prefix = 'stadium'
     class Meta:
         model = Stadium
         fields = (
             'name',
             'image',
-            'capacity',
-            'team',)
+            'capacity',)
 
         labels = {
             'name' : 'Name',
             'image': 'Image',
             'capacity': 'Capacity',
-            'team': 'Team',
         }
 
         widgets = {

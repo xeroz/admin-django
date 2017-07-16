@@ -36,20 +36,6 @@ class CreatePlayer(CreateView):
         form_statistic.save()
         return super(CreatePlayer, self).form_valid(form)
 
-def edit(request, id):
-
-    player = get_object_or_404(Player, id = id)
-
-    if request.method == 'POST':
-        form = PlayerForm(request.POST, request.FILES, instance = player)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/players/index')
-    else:
-        form = PlayerForm(instance = player)
-        data = {'form': form}
-        return render(request, 'players/edit.html', data)
-
 class EditPlayer(UpdateView):
     model = Player
     form_class = PlayerForm
@@ -80,13 +66,6 @@ class EditPlayer(UpdateView):
         self.object = form.save()
         form_statistic.save()
         return HttpResponseRedirect(self.get_success_url())
-
-def delete(render, id):
-
-    player = get_object_or_404(Player, id = id)
-    player.delete()
-
-    return HttpResponseRedirect('/players/index')
 
 class DeletePlayer(DeleteView):
     model = Player

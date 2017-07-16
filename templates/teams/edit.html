@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block extra-js %}
+    <script src="{% static 'js/filestyle.js' %}"></script>
     <script src="{% static 'js/moment.js' %}"></script>
     <script src="{% static 'js/datetimepicker.min.js' %}"></script>
     <script type="text/javascript">
@@ -23,32 +24,50 @@
     <small></small>
 </h3>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <!-- START panel-->
         <div class="panel panel-default">
             <div class="panel-body">
                 <form role="form" method="POST">
                     {% csrf_token %}
-                    <div class="form-group">
-                        {% if form %}
-                            {{ form.name.errors }}
-                        {% endif %}
-                        <label>{{ form.name.label }}</label>
-                        {{ form.name }}
-                    </div>
-                    <div class="form-group mb">
-                        {% if form %}
-                            {{ form.foundation.errors }}
-                        {% endif %}
-                        <label>{{ form.foundation.label }}</label>
-                        <div id="datetimepicker1" class="input-group date">
-                            {{ form.foundation }}
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar"></span>
-                            </span>
+                    <h3>Team</h3>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            {{ form.errors }}
+                            <label>{{ form.name.label }}</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group mb">
+                            {% if form %}
+                                {{ form.foundation.errors }}
+                            {% endif %}
+                            <label>{{ form.foundation.label }}</label>
+                            <div id="datetimepicker1" class="input-group date">
+                                {{ form.foundation }}
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                    <div class="col-lg-6">
+                        {{  form_stadium.errors}}
+                        <div class="form-group">
+                            <label>{{ form_stadium.name.label }}</label>
+                            {{ form_stadium.name }}
+                        </div>
+                        <div class="form-group">
+                            <label>{{ form_stadium.capacity.label }}</label>
+                            {{ form_stadium.capacity }}
+                        </div>
+                        <div class="form-group">
+                            <label>{{ form_stadium.image.label }}</label>
+                            {{ form_stadium.image }}
+                        </div>
+                    </div>
+                    <div class="pull-left">
+                        <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                    </div>
                 </form>
             </div>
         </div>
