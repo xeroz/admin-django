@@ -2,8 +2,14 @@
 
 {% load staticfiles %}
 
+{% block extra-css %}
+    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2-bootstrap.css' %}">
+{% endblock %}
+
 {% block extra-js %}
     <script src="{% static 'js/filestyle.js' %}"></script>
+    <script src="{% static 'js/select2.js' %}"></script>
 {% endblock %}
 
 {% block content %}

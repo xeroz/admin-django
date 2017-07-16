@@ -17,7 +17,7 @@ class CompetitionForm(forms.ModelForm):
 
         widgets ={
             'name': forms.TextInput(attrs={'class':'form-control'}),
-            'team': forms.Select(attrs={'class':'form-control'}),
+            'team': forms.SelectMultiple(attrs={'class':'form-control', 'id':'select2-3'}),
             'image' : forms.FileInput(attrs={'class':'form-control filestyle',
                                              'data-classinput':'form-control inline',
                                              'data-classbutton':'btn btn-default'}),

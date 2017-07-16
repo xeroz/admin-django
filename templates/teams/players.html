@@ -1,5 +1,11 @@
 {% extends 'layouts/admin/base.html' %}
 
+{% load staticfiles %}
+
+{% block extra-js %}
+    <script src="{% static 'js/Chart.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="content-heading">
     <!-- START Language list-->
@@ -23,18 +29,64 @@
                     </picture>
                 </div>
                 <div class="col-xs-7 align-middle p-lg">
-                    <div class="pull-right"><a href="#" ><span class="label label-primary pull-right"><h4>{{ player.number }}</h4></span></a>
+                    <div class="pull-right">
+                        <a href="#" ><span class="label label-primary pull-right"><h4>{{ player.number }}</h4></span></a>
                     </div>
                     <p>
                         <h3>{{ player.name }} {{ player.lastname }}</h3>
                         <strong>{{ player.position }}</strong>
                         <p>{{ player.country.name }}</p>
                     </p>
+                    <div class="pull-right">
+                        <button type="button" data-toggle="modal" data-target="#myModal" class="mb-sm btn btn-info btn-outline btn-square">
+                            Detail
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+{% endblock %}
 
+
+{% block modal %}
+<!-- Modal-->
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog">
+        <!-- START panel-->
+        <div id="panelDemo7" class="panel panel-default">
+            <div class="panel-heading">Detail</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-heading">Default</div>
+                            <div class="panel-body text-center">
+                                <div id="easypie1" data-percent="85" class="easypie-chart">
+                                <span>85</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel-heading">Progress Bar
+                        <div class="btn-group pull-right"></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="progress">
+                            <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%" class="progress-bar progress-bar-info">
+                                <span class="sr-only">70% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END panel-->
+    </div>
+</div>`
 {% endblock %}

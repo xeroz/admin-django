@@ -4,6 +4,18 @@
 <div class="content-heading">
     <!-- START Language list-->
     <div class="pull-right">
+        <!-- START button group-->
+        <div class="btn-group mb-sm">
+            <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-default btn-square">Edit Competition
+                <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+                {% for competition in competitions %}
+                <li><a href="{% url 'competitions:edit' competition.id %}">{{ competition.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- END button group-->
         <a type="button" href="{% url 'competitions:create' %}" class="mb-sm btn btn-primary btn-outline btn-square">New Competition</a>
     </div>
     <!-- END Language list    -->
@@ -11,7 +23,7 @@
 </div>
 <div class="row">
     {% for competition in competitions %}
-    <div class="col-md-3">
+    <div class="col-md-2">
         <!-- START widget-->
         <div class="panel widget">
             {% if competition.image %}
@@ -20,8 +32,11 @@
             <div class="panel-body">
             <div class="row row-table text-center">
                 <div class="col-xs-4">
-                    <p>Teams</p>
-                    <h3 class="m0 text-primary">700</h3>
+                    <a href="{% url 'competitions:teams' competition.id %}" style="text-decoration: none;">
+                        <p style="color: #656565">Teams</p>
+                    <h3 class="m0 text-primary">{{ competition.team.count }}</h3>
+                    </a>
+
                 </div>
                 <div class="col-xs-4">
                     <p>Tables</p>

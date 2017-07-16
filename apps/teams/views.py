@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from apps.teams.forms import TeamForm
+from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player
 
@@ -15,15 +15,22 @@ def index(request):
 
 def create(request):
 
+    teamform = TeamForm()
+    stadiumform = StadiumForm()
+
     if request.method == 'POST':
-        form = TeamForm(request.POST)
-        if form.is_valid():
+        form        = TeamForm(request.POST)
+        stadiumform = StadiumForm(request.POST)
+        if form.is_valid() and stadiumform.is_valid():
             form.save()
             return HttpResponseRedirect('/teams/index')
-    else:
-        form = TeamForm()
-        data = {'form': form}
-        return render(request, 'teams/create.html', data)
+
+
+    data = {
+        'teamform': teamform,
+        'stadiumform': stadiumform,
+    }
+    return render(request, 'teams/create.html', data)
 
 def edit(request, id):
 

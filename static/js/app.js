@@ -44,26 +44,26 @@
 })(window, document, window.jQuery);
 
 // Start Bootstrap JS
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
   $(function(){
 
     // POPOVER
-    // ----------------------------------- 
+    // -----------------------------------
 
     $('[data-toggle="popover"]').popover();
 
     // TOOLTIP
-    // ----------------------------------- 
+    // -----------------------------------
 
     $('[data-toggle="tooltip"]').tooltip({
       container: 'body'
     });
 
     // DROPDOWN INPUTS
-    // ----------------------------------- 
+    // -----------------------------------
     $('.dropdown input').on('click focus', function(event){
       event.stopPropagation();
     });
@@ -73,7 +73,7 @@
 })(window, document, window.jQuery);
 
 // Custom jQuery
-// ----------------------------------- 
+// -----------------------------------
 
 
 (function(window, document, $, undefined){
@@ -103,9 +103,9 @@
    * @param jQuery Object elements Set of element as jQuery objects
    */
   var ExternalEvent = function (elements) {
-      
+
       if (!elements) return;
-      
+
       elements.each(function() {
           var $this = $(this);
           // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -155,9 +155,9 @@
               day:   'day'
           },
           editable: true,
-          droppable: true, // this allows things to be dropped onto the calendar 
+          droppable: true, // this allows things to be dropped onto the calendar
           drop: function(date, allDay) { // this function is called when something is dropped
-              
+
               var $this = $(this),
                   // retrieve the dropped element's stored Event Object
                   originalEventObject = $this.data('calendarEventObject');
@@ -175,10 +175,10 @@
               clonedEventObject.borderColor = $this.css('border-color');
 
               // render the event on the calendar
-              // the last `true` argument determines if the event "sticks" 
+              // the last `true` argument determines if the event "sticks"
               // (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
               calElement.fullCalendar('renderEvent', clonedEventObject, true);
-              
+
               // if necessary remove the element from the list
               if(removeAfterDrop.is(':checked')) {
                 $this.remove();
@@ -212,17 +212,17 @@
     // Color switchers
     var eventColorSelector = $('.external-event-color-selector .circle');
 
-    // Trash events Droparea 
+    // Trash events Droparea
     $('.external-events-trash').droppable({
       accept:       '.fc-event',
       activeClass:  'active',
       hoverClass:   'hovered',
       tolerance:    'touch',
       drop: function(event, ui) {
-        
+
         // You can use this function to send an ajax request
         // to remove the event from the repository
-        
+
         if(draggingEvent) {
           var eid = draggingEvent.id || draggingEvent._id;
           // Remove the event
@@ -248,12 +248,12 @@
 
     eventAddBtn.click(function(e) {
         e.preventDefault();
-        
+
         // Get event name from input
         var val = eventNameInput.val();
         // Dont allow empty values
         if ($.trim(val) === '') return;
-        
+
         // Create new event element
         var newEvent = $('<div/>').css({
                             'background-color': currColor,
@@ -287,7 +287,7 @@
               {
                   title: 'All Day Event',
                   start: new Date(y, m, 1),
-                  backgroundColor: '#f56954', //red 
+                  backgroundColor: '#f56954', //red
                   borderColor: '#f56954' //red
               },
               {
@@ -344,7 +344,7 @@
 
         if(! $.fn.easyPieChart ) return;
 
-        var pieOptions1 = {
+        var pieOptions = {
             animate: {
                 duration: 800,
                 enabled: true
@@ -355,49 +355,8 @@
             lineWidth: 10,
             lineCap: 'circle'
         };
-        $('#easypie1').easyPieChart(pieOptions1);
-
-        var pieOptions2 = {
-            animate: {
-                duration: 800,
-                enabled: true
-            },
-            barColor: APP_COLORS['warning'],
-            trackColor: false,
-            scaleColor: false,
-            lineWidth: 4,
-            lineCap: 'circle'
-        };
-        $('#easypie2').easyPieChart(pieOptions2);
-
-        var pieOptions3 = {
-            animate: {
-                duration: 800,
-                enabled: true
-            },
-            barColor: APP_COLORS['danger'],
-            trackColor: false,
-            scaleColor: APP_COLORS['gray'],
-            lineWidth: 15,
-            lineCap: 'circle'
-        };
-        $('#easypie3').easyPieChart(pieOptions3);
-
-        var pieOptions4 = {
-            animate: {
-                duration: 800,
-                enabled: true
-            },
-            barColor: APP_COLORS['danger'],
-            trackColor: APP_COLORS['yellow'],
-            scaleColor: APP_COLORS['gray-dark'],
-            lineWidth: 15,
-            lineCap: 'circle'
-        };
-        $('#easypie4').easyPieChart(pieOptions4);
-
+        $('#easypie1').easyPieChart(pieOptions);
     });
-
 })(window, document, window.jQuery);
 // Knob chart
 // -----------------------------------
@@ -448,7 +407,7 @@
 })(window, document, window.jQuery);
 
 // Start Bootstrap JS
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -461,7 +420,7 @@
 
 
   // Line chart
-  // ----------------------------------- 
+  // -----------------------------------
 
     var lineData = {
         labels : ['January','February','March','April','May','June','July'],
@@ -510,7 +469,7 @@
     var lineChart = new Chart(linectx).Line(lineData, lineOptions);
 
   // Bar chart
-  // ----------------------------------- 
+  // -----------------------------------
 
     var barData = {
         labels : ['January','February','March','April','May','June','July'],
@@ -531,7 +490,7 @@
           }
         ]
     };
-    
+
     var barOptions = {
       scaleBeginAtZero : true,
       scaleShowGridLines : true,
@@ -548,8 +507,8 @@
     var barChart = new Chart(barctx).Bar(barData, barOptions);
 
   //  Doughnut chart
-  // ----------------------------------- 
-    
+  // -----------------------------------
+
     var doughnutData = [
           {
             value: 300,
@@ -587,7 +546,7 @@
     var doughnutChart = new Chart(doughnutctx).Doughnut(doughnutData, doughnutOptions);
 
   // Pie chart
-  // ----------------------------------- 
+  // -----------------------------------
 
     var pieData =[
           {
@@ -626,8 +585,8 @@
     var pieChart = new Chart(piectx).Pie(pieData, pieOptions);
 
   // Polar chart
-  // ----------------------------------- 
-    
+  // -----------------------------------
+
     var polarData = [
           {
             value: 300,
@@ -676,7 +635,7 @@
     var polarChart = new Chart(polarctx).PolarArea(polarData, polarOptions);
 
   // Radar chart
-  // ----------------------------------- 
+  // -----------------------------------
 
     var radarData = {
       labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
@@ -733,7 +692,7 @@
 })(window, document, window.jQuery);
 
 // Chartist
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -742,7 +701,7 @@
     if ( typeof Chartist === 'undefined' ) return;
 
     // Bar bipolar
-    // ----------------------------------- 
+    // -----------------------------------
     var data1 = {
       labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
       series: [
@@ -764,7 +723,7 @@
     new Chartist.Bar('#ct-bar1', data1, options1);
 
     // Bar Horizontal
-    // ----------------------------------- 
+    // -----------------------------------
     new Chartist.Bar('#ct-bar2', {
       labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       series: [
@@ -782,7 +741,7 @@
     });
 
     // Line
-    // ----------------------------------- 
+    // -----------------------------------
     new Chartist.Line('#ct-line1', {
       labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       series: [
@@ -800,7 +759,7 @@
 
 
     // SVG Animation
-    // ----------------------------------- 
+    // -----------------------------------
 
     var chart1 = new Chartist.Line('#ct-line3', {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -833,7 +792,7 @@
 
 
     // Slim animation
-    // ----------------------------------- 
+    // -----------------------------------
 
 
     var chart = new Chartist.Line('#ct-line2', {
@@ -970,7 +929,7 @@
 })(window, document, window.jQuery);
 
 // CLASSYLOADER
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -980,12 +939,12 @@
         inViewFlagClass = 'js-is-in-view'; // a classname to detect when a chart has been triggered after scroll
 
     $('[data-classyloader]').each(initClassyLoader);
-    
+
     function initClassyLoader() {
-    
+
       var $element = $(this),
           options  = $element.data();
-      
+
       // At lease we need a data-percentage attribute
       if(options) {
         if( options.triggerInView ) {
@@ -1028,7 +987,7 @@
   $(document).on('click', Selector, function (e) {
       e.preventDefault();
       var key = $(this).data('resetKey');
-      
+
       if(key) {
         $.localStorage.remove(key);
         // reload the page
@@ -1068,7 +1027,7 @@
 })(window, document, window.jQuery);
 
 // GLOBAL CONSTANTS
-// ----------------------------------- 
+// -----------------------------------
 
 
 (function(window, document, $, undefined){
@@ -1091,7 +1050,7 @@
     'gray-light':             '#e4eaec',
     'gray-lighter':           '#edf1f2'
   };
-  
+
   window.APP_MEDIAQUERY = {
     'desktopLG':             1200,
     'desktop':                992,
@@ -1103,7 +1062,7 @@
 
 
 // MARKDOWN DOCS
-// ----------------------------------- 
+// -----------------------------------
 
 
 (function(window, document, $, undefined){
@@ -1113,7 +1072,7 @@
     $('.flatdoc').each(function(){
 
       Flatdoc.run({
-        
+
         fetcher: Flatdoc.file('documentation/readme.md'),
 
         // Setup custom element selectors (markup validates)
@@ -1132,7 +1091,7 @@
 })(window, document, window.jQuery);
 
 // FULLSCREEN
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -1156,9 +1115,9 @@
         e.preventDefault();
 
         if (screenfull.enabled) {
-          
+
           screenfull.toggle();
-          
+
           // Switch icon indicator
           toggleFSIcon( $fsToggler );
 
@@ -1209,9 +1168,9 @@
 
   if($.fn.gMap) {
       var gMapRefs = [];
-      
+
       $(mapSelector).each(function(){
-          
+
           var $this   = $(this),
               addresses = $this.data('address') && $this.data('address').split(';'),
               titles    = $this.data('title') && $this.data('title').split(';'),
@@ -1254,7 +1213,7 @@
 
             // set the styles
             if($this.data('styled') !== undefined) {
-              
+
               ref.setOptions({
                 styles: MapStyles
               });
@@ -1489,19 +1448,19 @@
 
 })(window, document, window.jQuery);
 // LOAD CUSTOM CSS
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
   $(function(){
 
     $('[data-load-css]').on('click', function (e) {
-        
+
       var element = $(this);
 
       if(element.is('a'))
         e.preventDefault();
-      
+
       var uri = element.data('loadCss'),
           link;
 
@@ -1539,7 +1498,7 @@
 })(window, document, window.jQuery);
 
 // TRANSLATION
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -1573,7 +1532,7 @@
       currLang = $(this).data('setLang');
 
       if ( currLang ) {
-        
+
         opts.language = currLang;
 
         setLanguage(opts);
@@ -1582,7 +1541,7 @@
       }
 
     });
-    
+
 
     function setLanguage(options) {
       $("[data-localize]").localize(packName, options);
@@ -1601,8 +1560,8 @@
 
 })(window, document, window.jQuery);
 
-// JVECTOR MAP 
-// ----------------------------------- 
+// JVECTOR MAP
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -1614,7 +1573,7 @@
   };
 
   window.VectorMap = function(element, seriesData, markersData) {
-    
+
     if ( ! element || !element.length) return;
 
     var attrs       = element.data(),
@@ -1627,13 +1586,13 @@
           regionFill:   attrs.regionFill   || defaultColors.regionFill,
           mapName:      attrs.mapName      || 'world_mill_en'
         };
-    
+
     element.css('height', mapHeight);
-    
+
     init( element , options, seriesData, markersData);
-    
+
     function init($element, opts, series, markers) {
-        
+
         $element.vectorMap({
           map:             opts.mapName,
           backgroundColor: opts.bgColor,
@@ -1684,7 +1643,7 @@
 })(window, document, window.jQuery);
 
 // Morris
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -1709,7 +1668,7 @@
     ];
 
     // Line Chart
-    // ----------------------------------- 
+    // -----------------------------------
 
     new Morris.Line({
       element: 'morris-line',
@@ -1722,7 +1681,7 @@
     });
 
     // Donut Chart
-    // ----------------------------------- 
+    // -----------------------------------
     new Morris.Donut({
       element: 'morris-donut',
       data: donutdata,
@@ -1731,7 +1690,7 @@
     });
 
     // Bar Chart
-    // ----------------------------------- 
+    // -----------------------------------
     new Morris.Bar({
       element: 'morris-bar',
       data: chartdata,
@@ -1744,7 +1703,7 @@
     });
 
     // Area Chart
-    // ----------------------------------- 
+    // -----------------------------------
     new Morris.Area({
       element: 'morris-area',
       data: chartdata,
@@ -1867,7 +1826,7 @@
 
       if(!message)
         $.error('Notify: No message specified');
-     
+
       $.notify(message, options || {});
   }
 
@@ -2046,7 +2005,7 @@
 }(jQuery, window, document));
 
 // NOW TIMER
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -2063,7 +2022,7 @@
 
       updateTime();
       setInterval(updateTime, 1000);
-    
+
     });
   });
 
@@ -2078,13 +2037,13 @@
  =========================================================*/
 (function($, window, document){
   'use strict';
-  
+
   var panelSelector = '[data-tool="panel-dismiss"]',
       removeEvent   = 'panel.remove',
       removedEvent  = 'panel.removed';
 
   $(document).on('click', panelSelector, function () {
-    
+
     // find the first parent panel
     var parent = $(this).closest('.panel');
     var deferred = new $.Deferred();
@@ -2103,7 +2062,7 @@
 
     function destroyPanel() {
       var col = parent.parent();
-      
+
       $.when(parent.trigger(removedEvent, [parent]))
        .done(function(){
           parent.remove();
@@ -2116,7 +2075,7 @@
           }).remove();
        });
 
-      
+
 
     }
 
@@ -2146,7 +2105,7 @@
         collapseOpts = {toggle: false},
         iconElement  = $this.children('em'),
         panelId      = parent.attr('id');
-    
+
     // if wrapper not added, add it
     // we need a wrapper to avoid jumping due to the paddings
     if( ! wrapper.length) {
@@ -2183,7 +2142,7 @@
 
   // finally catch clicks to toggle panel collapse
   $(document).on('click', panelSelector, function () {
-    
+
     var parent = $(this).closest('.panel');
     var wrapper = parent.find('.panel-wrapper');
 
@@ -2261,21 +2220,21 @@
 /**=========================================================
  * Module: play-animation.js
  * Provides a simple way to run animation with a trigger
- * Targeted elements must have 
+ * Targeted elements must have
  *   [data-animate"]
- *   [data-target="Target element affected by the animation"] 
+ *   [data-target="Target element affected by the animation"]
  *   [data-play="Animation name (http://daneden.github.io/animate.css/)"]
  *
  * Requires animo.js
  =========================================================*/
- 
+
 (function($, window, document){
   'use strict';
 
   var Selector = '[data-animate]';
 
   $(function() {
-    
+
     var $scroller = $(window).add('body, .wrapper');
 
     // Parse animations params and attach trigger to scroll
@@ -2284,9 +2243,9 @@
           offset    = $this.data('offset'),
           delay     = $this.data('delay')     || 100, // milliseconds
           animation = $this.data('play')      || 'bounce';
-      
+
       if(typeof offset !== 'undefined') {
-        
+
         // test if the element starts visible
         testAnimation($this);
         // test on scroll
@@ -2325,7 +2284,7 @@
       if(target && target.length) {
         target.animo( { animation: animation } );
       }
-      
+
     });
 
   });
@@ -2373,9 +2332,9 @@
   });
 
   function savePortletOrder(event, ui) {
-    
+
     var data = $.localStorage.get(storageKeyName);
-    
+
     if(!data) { data = {}; }
 
     data[this.id] = $(this).sortable('toArray');
@@ -2383,21 +2342,21 @@
     if(data) {
       $.localStorage.set(storageKeyName, data);
     }
-    
+
   }
 
   function loadPortletOrder() {
-    
+
     var data = $.localStorage.get(storageKeyName);
 
     if(data) {
-      
+
       var porletId = this.id,
           panels   = data[porletId];
 
       if(panels) {
         var portlet = $('#'+porletId);
-        
+
         $.each(panels, function(index, value) {
            $('#'+value).appendTo(portlet);
         });
@@ -2411,12 +2370,12 @@
 
 
 // Rickshaw
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
   $(function(){
-    
+
     if ( typeof Rickshaw === 'undefined' ) return;
 
     var seriesData = [ [], [], [] ];
@@ -2443,16 +2402,16 @@
     ];
 
     var graph1 = new Rickshaw.Graph( {
-        element: document.querySelector("#rickshaw1"), 
+        element: document.querySelector("#rickshaw1"),
         series:series1,
         renderer: 'area'
     });
-     
+
     graph1.render();
 
 
     // Graph 2
-    // ----------------------------------- 
+    // -----------------------------------
 
     var graph2 = new Rickshaw.Graph( {
       element: document.querySelector("#rickshaw2"),
@@ -2470,7 +2429,7 @@
     graph2.render();
 
     // Graph 3
-    // ----------------------------------- 
+    // -----------------------------------
 
 
     var graph3 = new Rickshaw.Graph({
@@ -2488,13 +2447,13 @@
 
 
     // Graph 4
-    // ----------------------------------- 
+    // -----------------------------------
 
 
     var graph4 = new Rickshaw.Graph( {
       element: document.querySelector("#rickshaw4"),
       renderer: 'bar',
-      series: [ 
+      series: [
         {
           data: [ { x: 0, y: 40 }, { x: 1, y: 49 }, { x: 2, y: 38 }, { x: 3, y: 30 }, { x: 4, y: 32 } ],
           color: '#fad732'
@@ -2719,7 +2678,7 @@
 
 })(window, document, window.jQuery);
 // SKYCONS
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -2728,7 +2687,7 @@
     $('[data-skycon]').each(function(){
       var element = $(this),
           skycons = new Skycons({'color': (element.data('color') || 'white')});
-      
+
       element.html('<canvas width="' + element.data('width') + '" height="' + element.data('height') + '"></canvas>');
 
       skycons.add(element.children()[0], element.data('skycon'));
@@ -2740,7 +2699,7 @@
 
 })(window, document, window.jQuery);
 // SLIMSCROLL
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -2750,18 +2709,18 @@
 
       var element = $(this),
           defaultHeight = 250;
-      
+
       element.slimScroll({
           height: (element.data('height') || defaultHeight)
       });
-      
+
     });
   });
 
 })(window, document, window.jQuery);
 
 // SPARKLINE
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -2790,7 +2749,7 @@
 })(window, document, window.jQuery);
 
 // Sweet Alert
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -2856,7 +2815,7 @@
 })(window, document, window.jQuery);
 
 // Custom jQuery
-// ----------------------------------- 
+// -----------------------------------
 
 
 (function(window, document, $, undefined){
@@ -2987,7 +2946,7 @@
 })(window, document, window.jQuery);
 
 // Bootstrap Tour
-// ----------------------------------- 
+// -----------------------------------
 
 (function(window, document, $, undefined){
 
@@ -3021,7 +2980,7 @@
       // Initialize the tour
       tour.init();
 
-      
+
       $('#start-tour').on('click', function(){
         // Start the tour
         tour.restart();
@@ -3057,13 +3016,13 @@
 })(window, document, window.jQuery);
 /**=========================================================
  * Module: utils.js
- * jQuery Utility functions library 
+ * jQuery Utility functions library
  * adapted from the core of UIKit
  =========================================================*/
 
 (function($, window, doc){
     'use strict';
-    
+
     var $html = $("html"), $win = $(window);
 
     $.support.transition = (function() {
@@ -3222,7 +3181,7 @@
 
 }(jQuery, window, document));
 // Custom jQuery
-// ----------------------------------- 
+// -----------------------------------
 
 
 (function(window, document, $, undefined){

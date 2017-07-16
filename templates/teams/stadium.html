@@ -19,43 +19,36 @@
         <!-- START widget-->
         <div class="panel widget">
             <div class="row row-table row-flush">
-                <div class="col-xs-4 bg-info text-center">
-                    <em class="fa fa-users fa-2x"></em>
+                <div class="col-xs-6 bb br">
+                    <div class="row row-table row-flush">
+                        <div class="col-xs-8">
+                            <div class="panel-body text-center">
+                            <h4 class="mt0">{{ stadium.name }}</h4>
+                            <p class="mb0 text-muted">STADIUM</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-8">
-                    <div class="panel-body text-center">
-                        <h4 class="mt0">{{ stadium.name }}</h4>
-                        <p class="mb0 text-muted">STADIUM</p>
+                <div class="col-xs-6 bb">
+                    <div class="row row-table row-flush">
+                        <div class="col-xs-8">
+                            <div class="panel-body text-center">
+                            <h4 class="mt0">{{ stadium.team.name }}</h4>
+                            <p class="mb0 text-muted">TEAM</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- END widget-->
-        <!-- START widget-->
-        <div class="panel widget">
             <div class="row row-table row-flush">
-                <div class="col-xs-4 bg-info text-center">
-                    <em class="fa fa-users fa-2x"></em>
-                </div>
-                <div class="col-xs-8">
-                    <div class="panel-body text-center">
-                        <h4 class="mt0">{{ stadium.team.name }}</h4>
-                        <p class="mb0 text-muted">TEAM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END widget-->
-        <!-- START widget-->
-        <div class="panel widget">
-            <div class="row row-table row-flush">
-                <div class="col-xs-4 bg-info text-center">
-                    <em class="fa fa-users fa-2x"></em>
-                </div>
-                <div class="col-xs-8">
-                    <div class="panel-body text-center">
-                        <h4 class="mt0">{{ stadium.capacity }}</h4>
-                        <p class="mb0 text-muted">CAPACITY</p>
+                <div class="col-xs-12 br">
+                    <div class="row row-table row-flush">
+                        <div class="col-xs-8">
+                            <div class="panel-body text-center">
+                            <h4 class="mt0">{{ stadium.capacity }}</h4>
+                            <p class="mb0 text-muted">CAPACITY</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

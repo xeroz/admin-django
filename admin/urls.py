@@ -17,12 +17,22 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+
+url_password_reset   = {'template_name':'auth/password/send_email.html', 'email_template_name':'auth/password/reset_email.html'}
+url_password_done    = {'template':'auth/password/reset_done.html'}
+url_password_confirm = {'template_name': 'auth/password/reset_confirm.html'}
+url_done = {'template_name': 'registration/password_reset_complete.html'}
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', login, {'template_name':'auth/login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/'}, name= 'logout'),
+    url(r'^reset/password/$', password_reset, url_password_reset, name='password_reset'),
+    url(r'^reset/password_done/$', password_reset_done, url_password_done, name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm, url_password_confirm, name='password_reset_confirm'),
+    url(r'^reset/done', password_reset_complete, url_done, name='password_reset_complete'),
+    #urls admin
     url(r'^', include('apps.home.urls')),
     url(r'^users/', include('apps.users.urls', namespace='users')),
     url(r'^teams/', include('apps.teams.urls', namespace='teams')),

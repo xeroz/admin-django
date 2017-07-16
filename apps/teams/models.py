@@ -17,5 +17,5 @@ class Team(models.Model):
 class Stadium(models.Model):
     name     = models.CharField(max_length=50, default='')
     image    = models.ImageField(upload_to='stadium_image', blank=True)
-    capacity = models.IntegerField(default=10)
+    capacity = models.IntegerField(default='')
     team     = models.OneToOneField(Team)
