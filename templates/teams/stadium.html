@@ -1,5 +1,18 @@
 {% extends 'layouts/admin/base.html' %}
 
+{% block extra-css %}
+<style>
+    #map {
+        height: 417px;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block extra-js %}
+
+{% endblock %}
+
 {% block content %}
 <div class="content-heading">
     <!-- START Language list-->
@@ -54,6 +67,29 @@
             </div>
         </div>
         <!-- END widget-->
+{% if stadium.position %}
+        <div id="map"></div>
     </div>
 </div>
+<script>
+    function initMap() {
+        var uluru = {
+            lat: parseFloat('{{ stadium.position.latitude }}'),
+            lng: parseFloat('{{ stadium.position.longitude }}'),
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2SZ_Bg6EiQQCNIe4243MQkuREU3MnSM0&callback=initMap">
+</script>
+{% endif %}
 {% endblock %}

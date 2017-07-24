@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "geoposition",
     'apps.home',
     'apps.users',
     'apps.teams',
@@ -146,3 +147,5 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'elbarto2589@gmail.com'
 EMAIL_HOST_PASSWORD = 'breikers'
 EMAIL_BACKEND = 'django.core.email.backends.smtp.EmailBackend'
+
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyD2SZ_Bg6EiQQCNIe4243MQkuREU3MnSM0'

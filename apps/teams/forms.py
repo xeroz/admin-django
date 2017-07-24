@@ -23,7 +23,8 @@ class StadiumForm(forms.ModelForm):
         fields = (
             'name',
             'image',
-            'capacity',)
+            'capacity',
+            'position',)
 
         labels = {
             'name' : 'Name',
