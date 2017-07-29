@@ -67,10 +67,12 @@
             </div>
         </div>
         <!-- END widget-->
-{% if stadium.position %}
+        {% if stadium.position %}
         <div id="map"></div>
+        {% endif %}
     </div>
 </div>
+{% if stadium.position %}
 <script>
     function initMap() {
         var uluru = {

@@ -18,6 +18,7 @@ class Player(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Statistics(models.Model):
     pace = models.IntegerField()
     shooting = models.IntegerField()

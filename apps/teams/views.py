@@ -5,12 +5,14 @@ from django.core import serializers
 from django.http import HttpResponse
 from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
-from apps.players.models import Player
+from apps.players.models import Player, Statistics
+import json
 
 # Create your views here.
 class ListTeams(ListView):
     model = Team
     template_name = 'teams/index.html'
+
 
 class CreateTeam(CreateView):
     model = Team
@@ -80,6 +82,7 @@ class DeleteTeam(DeleteView):
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
+
 class ListPlayersByTeam(View):
     template_name = 'teams/players.html'
 
@@ -92,19 +95,30 @@ class ListPlayersByTeam(View):
         }
         return render(request, self.template_name, data)
 
+
 class ListStadiumByTeam(View):
     template_name = 'teams/stadium.html'
     model = Stadium
 
     def get(self, request, pk):
-        stadium = Stadium.objects.get(team__pk = pk)
+        stadium = Stadium.objects.get(team__pk=pk)
         data = {
             'stadium': stadium,
         }
         return render(request, self.template_name, data)
+
 
 def get_players_by_country(request):
     country = request.GET.get('country')
     team_id = request.GET.get('team_id')
     players = Player.objects.filter(country=country).filter(team=team_id)
     return HttpResponse(serializers.serialize('json', players), content_type="application/json")
+
+
+def get_detail_player(request):
+    player_id = request.GET.get('player_id')
+    # player = Player.objects.filter(pk=player_id).values()
+    # print(player.player.pace)
+    statistic = Statistics.objects.get(player__pk=player_id)
+
+    return HttpResponse(serializers.serialize("json", [statistic]), content_type="application/json")

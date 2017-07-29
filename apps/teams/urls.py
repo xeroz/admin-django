@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^players/(?P<pk>\w+)/$', login_required(views.ListPlayersByTeam.as_view()), name = 'players'),
     url(r'^stadium/(?P<pk>\w+)/$', login_required(views.ListStadiumByTeam.as_view()), name = 'stadium'),
     url(r'^get_players_by_country/$', views.get_players_by_country, name = 'get_players_by_country'),
+    url(r'^get_detail_player/$', views.get_detail_player, name = 'get_detail_player'),
 ]
