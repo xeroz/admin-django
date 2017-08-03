@@ -111,14 +111,16 @@ class ListStadiumByTeam(View):
 def get_players_by_country(request):
     country = request.GET.get('country')
     team_id = request.GET.get('team_id')
-    players = Player.objects.filter(country=country).filter(team=team_id)
+    players = Player.objects.filter(country=country,
+                                    team=team_id)
     return HttpResponse(serializers.serialize('json', players), content_type="application/json")
-
 
 def get_detail_player(request):
     player_id = request.GET.get('player_id')
-    # player = Player.objects.filter(pk=player_id).values()
-    # print(player.player.pace)
     statistic = Statistics.objects.get(player__pk=player_id)
+    query = Statistics.objects.get(player__pk=player_id).select_related('player')
+
+    print('sdd', query)
+    print(serializers.serialize("json", [player.statistic, player]))
 
     return HttpResponse(serializers.serialize("json", [statistic]), content_type="application/json")

@@ -26,4 +26,4 @@ class Statistics(models.Model):
     dribbling = models.IntegerField()
     defending = models.IntegerField()
     physical = models.IntegerField()
-    player = models.OneToOneField(Player, related_name='player_statistic')
+    player = models.OneToOneField(Player, related_name='statistic')
