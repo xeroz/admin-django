@@ -18,15 +18,26 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+from apps.users import views
 
-url_password_reset   = {'template_name':'auth/password/send_email.html', 'email_template_name':'auth/password/reset_email.html'}
-url_password_done    = {'template':'auth/password/reset_done.html'}
-url_password_confirm = {'template_name': 'auth/password/reset_confirm.html'}
-url_done = {'template_name': 'registration/password_reset_complete.html'}
+url_password_reset = {
+    'template_name':'auth/password/send_email.html',
+    'email_template_name':'auth/password/reset_email.html'
+}
+url_password_done = {
+    'template':'auth/password/reset_done.html'
+}
+url_password_confirm = {
+    'template_name': 'auth/password/reset_confirm.html'
+}
+url_done = {
+    'template_name': 'registration/password_reset_complete.html'
+}
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', login, {'template_name':'auth/login.html'}, name='login'),
+    url(r'^register/', views.register_user, name = 'register'),
     url(r'^logout/$', logout, {'next_page': '/'}, name= 'logout'),
     url(r'^reset/password/$', password_reset, url_password_reset, name='password_reset'),
     url(r'^reset/password_done/$', password_reset_done, url_password_done, name='password_reset_done'),

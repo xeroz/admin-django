@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
-
     users = User.objects.all()
 
     data = {
@@ -13,7 +12,6 @@ def index(request):
     return render(request, 'users/index.html', data)
 
 def create(request):
-
     if request.method == 'POST':
         form = Registrationform(request.POST)
         if form.is_valid():
@@ -27,7 +25,6 @@ def create(request):
     return render(request, 'users/create.html', {})
 
 def edit(request, id):
-
     user = get_object_or_404(User, id = id)
 
     if request.method == 'POST':
@@ -52,8 +49,16 @@ def edit(request, id):
     return render(request, 'users/edit.html', data)
 
 def delete(render, id):
-
     user = get_object_or_404(User, id = id)
     user.delete()
-
     return HttpResponseRedirect('/users/index')
+
+def register_user(request):
+    if request.method == 'POST':
+        form = Registrationform(request.POST)
+        print(form)
+        print(form.is_valid())
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    return render(request, 'auth/register.html', {})
