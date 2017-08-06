@@ -4,7 +4,11 @@ from apps.teams.models import Team, Stadium
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ('name', 'foundation',)
+        fields = (
+            'name',
+            'foundation',
+            'image'
+        )
 
         labels = {
             'name' : 'Name',
@@ -13,6 +17,9 @@ class TeamForm(forms.ModelForm):
 
         widgets = {
             'name' : forms.TextInput(attrs={'class':'form-control', 'required': False}),
+            'image': forms.FileInput(attrs={'class':'form-control filestyle',
+                                            'data-classinput':'form-control inline',
+                                            'data-classbutton':'btn btn-default'}),
             'foundation' : forms.TextInput(attrs={'class':'form-control'}),
         }
 

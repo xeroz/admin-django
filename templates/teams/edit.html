@@ -42,11 +42,16 @@
                             <label>{{ form.name.label }}</label>
                             {{ form.name }}
                         </div>
+                        <div class="form-group">
+                            {{ form.errors }}
+                            <label>Image</label>
+                            {{ form.image }}
+                        </div>
                         <div class="form-group mb">
                             {% if form %}
                                 {{ form.foundation.errors }}
                             {% endif %}
-                            <label>{{ form.foundation.label }}</label>
+                            <label>Foundation</label>
                             <div id="datetimepicker1" class="input-group date">
                                 {{ form.foundation }}
                                 <span class="input-group-addon">

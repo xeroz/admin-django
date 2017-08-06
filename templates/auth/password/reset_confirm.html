@@ -13,14 +13,20 @@
         </div>
         <div class="panel-body">
             {% if validlink %}
-            <p class="text-center pv">SEND AN EMAIL</p>
+            <p class="text-center pv">Reset Password</p>
             <form method="post" role="form" data-parsley-validate="" novalidate="" class="mb-lg">
                 {% csrf_token %}
                 <div class="form-group has-feedback">
-                    <input id="" type="text" placeholder="Enter email" name="email" class="form-control" required>
-                    <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                    <label for="signupInputPassword1" class="text-muted">Password</label>
+                    <input id="signupInputPassword1" name="new_password1" type="password" placeholder="Password" required class="form-control">
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
                 </div>
-                <button type="submit" class="btn btn-block btn-primary mt-lg">Send</button>
+                <div class="form-group has-feedback">
+                    <label for="signupInputRePassword1" class="text-muted">Retype Password</label>
+                    <input id="signupInputRePassword1" name="new_password2" type="password" placeholder="Retype Password" required data-parsley-equalto="#signupInputPassword1" class="form-control">
+                    <span class="fa fa-lock form-control-feedback text-muted"></span>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary mt-lg">Reset Password</button>
             </form>
             {% else %}
             <h1>Invalid Link</h1>

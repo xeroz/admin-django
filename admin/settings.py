@@ -146,6 +146,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'elbarto2589@gmail.com'
 EMAIL_HOST_PASSWORD = 'breikers'
-EMAIL_BACKEND = 'django.core.email.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyD2SZ_Bg6EiQQCNIe4243MQkuREU3MnSM0'
