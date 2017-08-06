@@ -29,6 +29,7 @@ class CreateTeam(CreateView):
     def post(self, request, *args, **kwargs):
         self.object = None
         form = self.get_form()
+        print(form)
         form_stadium = StadiumForm(request.POST, request.FILES)
         if form.is_valid() and form_stadium.is_valid():
             return self.form_valid(form, form_stadium)
@@ -61,7 +62,7 @@ class EditTeam(UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = self.form_class(request.POST, instance=self.object)
+        form = self.form_class(request.POST, request.FILES,instance=self.object)
         stadium = self.get_object().team_stadium
         form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium, prefix='stadium')
         if form.is_valid() and form_stadium.is_valid():
@@ -118,9 +119,9 @@ def get_players_by_country(request):
 def get_detail_player(request):
     player_id = request.GET.get('player_id')
     statistic = Statistics.objects.get(player__pk=player_id)
-    query = Statistics.objects.get(player__pk=player_id).select_related('player')
+    # query = Statistics.objects.get(player__pk=player_id).select_related('player')
 
-    print('sdd', query)
-    print(serializers.serialize("json", [player.statistic, player]))
+    # print('sdd', query)
+    # print(serializers.serialize("json", [player.statistic, player]))
 
     return HttpResponse(serializers.serialize("json", [statistic]), content_type="application/json")

@@ -37,13 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "geoposition",
+    'geoposition',
+    'wkhtmltopdf',
+    'django_countries',
     'apps.home',
     'apps.users',
     'apps.teams',
     'apps.players',
     'apps.competitions',
-    'django_countries',
 ]
 
 MIDDLEWARE = [

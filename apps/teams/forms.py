@@ -10,11 +10,6 @@ class TeamForm(forms.ModelForm):
             'image'
         )
 
-        labels = {
-            'name' : 'Name',
-            'fondation' : 'Foundation',
-        }
-
         widgets = {
             'name' : forms.TextInput(attrs={'class':'form-control', 'required': False}),
             'image': forms.FileInput(attrs={'class':'form-control filestyle',
@@ -31,7 +26,7 @@ class StadiumForm(forms.ModelForm):
             'name',
             'image',
             'capacity',
-            'position',)
+        )
 
         labels = {
             'name' : 'Name',

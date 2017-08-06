@@ -20,7 +20,7 @@ class Stadium(models.Model):
     image = models.ImageField(upload_to='stadium_image', blank=True)
     capacity = models.IntegerField(default='')
     team = models.OneToOneField(Team, related_name='team_stadium')
-    position = GeopositionField(null=True)
+    position = GeopositionField(null=True, blank=True)
 
     def __str__(self):
         return self.name

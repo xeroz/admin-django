@@ -39,14 +39,11 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             {{ form.errors }}
-                            <label>{{ form.name.label }}</label>
+                            <label>Name</label>
                             {{ form.name }}
                         </div>
                         <div class="form-group mb">
-                            {% if form %}
-                                {{ form.foundation.errors }}
-                            {% endif %}
-                            <label>{{ form.foundation.label }}</label>
+                            <label>Foundation</label>
                             <div id="datetimepicker1" class="input-group date">
                                 {{ form.foundation }}
                                 <span class="input-group-addon">
@@ -58,15 +55,15 @@
                     <div class="col-lg-6">
                         {{  form_stadium.errors}}
                         <div class="form-group">
-                            <label>{{ form_stadium.name.label }}</label>
+                            <label>Name</label>
                             {{ form_stadium.name }}
                         </div>
                         <div class="form-group">
-                            <label>{{ form_stadium.capacity.label }}</label>
+                            <label>Capacity</label>
                             {{ form_stadium.capacity }}
                         </div>
                         <div class="form-group">
-                            <label>{{ form_stadium.image.label }}</label>
+                            <label>Image</label>
                             {{ form_stadium.image }}
                         </div>
                     </div>

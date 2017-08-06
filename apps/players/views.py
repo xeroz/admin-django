@@ -10,6 +10,7 @@ class ListPlayer(ListView):
     model = Player
     template_name = 'players/index.html'
 
+
 class CreatePlayer(CreateView):
     model = Player
     form_class = PlayerForm
@@ -36,6 +37,7 @@ class CreatePlayer(CreateView):
         form_statistic.save()
         return super(CreatePlayer, self).form_valid(form)
 
+
 class EditPlayer(UpdateView):
     model = Player
     form_class = PlayerForm
@@ -45,7 +47,7 @@ class EditPlayer(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditPlayer, self).get_context_data(**kwargs)
         try:
-            statistic = self.get_object().player_statistic
+            statistic = self.get_object().statistic
             form_statistic = StatisticForm(instance=statistic)
         except ObjectDoesNotExist:
             form_statistic = StatisticForm()
@@ -54,8 +56,10 @@ class EditPlayer(UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
+        print(self.object)
         form = self.form_class(request.POST, request.FILES, instance=self.object)
-        statistic = self.get_object().player_statistic
+        print(form)
+        statistic = self.get_object().statistic
         form_statistic = StatisticForm(request.POST, instance=statistic)
         if form.is_valid() and form_statistic.is_valid():
             return self.form_valid(form, form_statistic)
@@ -66,6 +70,7 @@ class EditPlayer(UpdateView):
         self.object = form.save()
         form_statistic.save()
         return HttpResponseRedirect(self.get_success_url())
+
 
 class DeletePlayer(DeleteView):
     model = Player
