@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'geoposition',
-    # 'wkhtmltopdf',
+    'wkhtmltopdf',
     'django_countries',
     'apps.home',
     'apps.users',
