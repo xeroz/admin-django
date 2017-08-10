@@ -1,12 +1,18 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    View
+)
 from django.core.urlresolvers import reverse_lazy
 from django.core import serializers
 from django.http import HttpResponse
 from apps.teams.forms import TeamForm, StadiumForm
 from apps.teams.models import Team, Stadium
 from apps.players.models import Player, Statistics
-import json
+
 
 # Create your views here.
 class ListTeams(ListView):
@@ -56,15 +62,27 @@ class EditTeam(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditTeam, self).get_context_data(**kwargs)
         stadium = self.get_object().team_stadium
-        form_stadium = StadiumForm(instance = stadium, prefix='stadium')
+        form_stadium = StadiumForm(
+            instance=stadium,
+            prefix='stadium'
+        )
         context['form_stadium'] = form_stadium
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = self.form_class(request.POST, request.FILES,instance=self.object)
+        form = self.form_class(
+            request.POST,
+            request.FILES,
+            instance=self.object
+        )
         stadium = self.get_object().team_stadium
-        form_stadium = StadiumForm(request.POST, request.FILES, instance=stadium, prefix='stadium')
+        form_stadium = StadiumForm(
+            request.POST,
+            request.FILES,
+            instance=stadium,
+            prefix='stadium'
+        )
         if form.is_valid() and form_stadium.is_valid():
             return self.form_valid(form, form_stadium)
         else:
@@ -88,8 +106,8 @@ class ListPlayersByTeam(View):
     template_name = 'teams/players.html'
 
     def get(self, request, pk):
-        players = Player.objects.filter(team__pk = pk)
-        team  = get_object_or_404(Team, id = pk)
+        players = Player.objects.filter(team__pk=pk)
+        team = get_object_or_404(Team, id=pk)
         data = {
             'players': players,
             'team': team,
@@ -112,16 +130,19 @@ class ListStadiumByTeam(View):
 def get_players_by_country(request):
     country = request.GET.get('country')
     team_id = request.GET.get('team_id')
-    players = Player.objects.filter(country=country,
-                                    team=team_id)
-    return HttpResponse(serializers.serialize('json', players), content_type="application/json")
+    players = Player.objects.filter(country=country, team=team_id)
+    json_players = serializers.serialize('json', players)
+    return HttpResponse(json_players, content_type="application/json")
+
 
 def get_detail_player(request):
     player_id = request.GET.get('player_id')
     statistic = Statistics.objects.get(player__pk=player_id)
-    # query = Statistics.objects.get(player__pk=player_id).select_related('player')
+    json_statistic = serializers.serialize("json", [statistic])
+    # query = Statistics.objects.get(player__pk=player_id)
+    # .select_related('player')
 
     # print('sdd', query)
     # print(serializers.serialize("json", [player.statistic, player]))
 
-    return HttpResponse(serializers.serialize("json", [statistic]), content_type="application/json")
+    return HttpResponse(json_statistic, content_type="application/json")

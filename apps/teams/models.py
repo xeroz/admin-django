@@ -3,6 +3,8 @@ from django_countries.fields import CountryField
 from geoposition.fields import GeopositionField
 
 # Create your models here.
+
+
 class Team(models.Model):
     name = models.CharField(max_length=50, default='')
     foundation = models.DateField()
@@ -14,6 +16,7 @@ class Team(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class Stadium(models.Model):
     name = models.CharField(max_length=50, default='')
