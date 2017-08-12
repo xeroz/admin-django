@@ -1,10 +1,11 @@
-from django.shortcuts import (
-    render,
-    HttpResponseRedirect,
-    get_object_or_404,
-    HttpResponse
+
+from django.shortcuts import HttpResponseRedirect
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView
 )
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from apps.players.forms import PlayerForm, StatisticForm
@@ -15,6 +16,8 @@ from django.template import Context
 import pdfkit
 
 # Create your views here.
+
+
 class ListPlayer(ListView):
     model = Player
     template_name = 'players/index.html'
@@ -66,7 +69,11 @@ class EditPlayer(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         print(self.object)
-        form = self.form_class(request.POST, request.FILES, instance=self.object)
+        form = self.form_class(
+            request.POST,
+            request.FILES,
+            instance=self.object
+        )
         print(form)
         statistic = self.get_object().statistic
         form_statistic = StatisticForm(request.POST, instance=statistic)
