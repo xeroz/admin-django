@@ -8,6 +8,10 @@ from apps.teams.models import Team, Stadium
 from apps.players.models import Player, Statistics
 import json
 
+from django.template.loader import get_template
+from django.template import Context
+import pdfkit
+
 # Create your views here.
 class ListTeams(ListView):
     model = Team
@@ -116,6 +120,7 @@ def get_players_by_country(request):
                                     team=team_id)
     return HttpResponse(serializers.serialize('json', players), content_type="application/json")
 
+
 def get_detail_player(request):
     player_id = request.GET.get('player_id')
     statistic = Statistics.objects.get(player__pk=player_id)
@@ -125,3 +130,7 @@ def get_detail_player(request):
     # print(serializers.serialize("json", [player.statistic, player]))
 
     return HttpResponse(serializers.serialize("json", [statistic]), content_type="application/json")
+
+
+def report_player(request):
+    pass

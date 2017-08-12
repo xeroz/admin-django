@@ -1,9 +1,18 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import (
+    render,
+    HttpResponseRedirect,
+    get_object_or_404,
+    HttpResponse
+)
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from apps.players.forms import PlayerForm, StatisticForm
 from apps.players.models import Player
+
+from django.template.loader import get_template
+from django.template import Context
+import pdfkit
 
 # Create your views here.
 class ListPlayer(ListView):
@@ -78,3 +87,20 @@ class DeletePlayer(DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+def report_player(request, pk):
+    # domain = Site.objects.get_current().domain
+    # print('dfjkjnfdlfdk')
+    # print(request.get_host())
+    # print('dfjkjnfdlfdk')
+    template = get_template('reports/players/by_player.html')
+    html = template.render({})
+    pdfkit.from_string(html, 'out.pdf')
+    pdf = open("out.pdf")
+    response = HttpResponse(pdf.read(), content_type='application/pdf')  # Generates the response as pdf response.
+    response['Content-Disposition'] = 'attachment; filename=output.pdf'
+    pdf.close()
+    os.remove("out.pdf")  # remove the locally created pdf file.
+    return response  # returns the response.
+

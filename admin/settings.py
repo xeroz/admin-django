@@ -150,3 +150,5 @@ EMAIL_HOST_PASSWORD = 'breikers'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyD2SZ_Bg6EiQQCNIe4243MQkuREU3MnSM0'
+
+DOMAIN = 'http://127.0.0.1:8000/'

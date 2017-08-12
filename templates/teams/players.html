@@ -48,7 +48,8 @@
                         <p>{{ player.country.name }}</p>
                     </p>
                     <div class="pull-right">
-                        <button type="button" id="{{ player.id }}" class="mb-sm btn btn-info btn-outline btn-square detail"> Detail</button>
+                        <a type="button" id="{{ player.id }}" class="mb-sm btn btn-info btn-outline btn-square detail"> Detail</a>
+                        <a type="button" href="{% url 'players:report_player' player.id %}" class="mb-sm btn btn-warning btn-outline btn-square detail"> report</a>
                     </div>
                 </div>
             </div>

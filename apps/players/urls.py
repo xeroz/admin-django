@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^create/', login_required(views.CreatePlayer.as_view()), name = 'create'),
     url(r'^edit/(?P<pk>\w+)/$', login_required(views.EditPlayer.as_view()), name = 'edit'),
     url(r'^delete/(?P<pk>\w+)/$', login_required(views.DeletePlayer.as_view()), name = 'delete'),
+    url(r'^report_player/(?P<pk>\w+)/$', views.report_player, name = 'report_player'),
 ]

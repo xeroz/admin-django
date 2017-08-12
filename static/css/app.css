@@ -5003,7 +5003,7 @@ x:-o-prefocus,
  ========================================================================== */
 /**
  * Custom form elements
- *    - Checkbox 
+ *    - Checkbox
  *    - Radios
  *    - Switch
  *    - Rounded inputs
@@ -7575,6 +7575,9 @@ body .jvectormap-zoomout {
 .wd-xl {
   width: 320px;
 }
+.wd-xxxl {
+  width: 1000px;
+}
 .wd-xxl {
   width: 360px;
 }
@@ -7703,7 +7706,7 @@ body .jvectormap-zoomout {
   max-width: 100%;
   min-width: 100%;
 }
-/** 
+/**
  * Displays hidden content on hover. Add this class to the parent element.
  * Markup
  *   <div class="hover-visible">
