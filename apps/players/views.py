@@ -1,5 +1,5 @@
 
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, render, HttpResponse
 from django.views.generic import (
     ListView,
     CreateView,
@@ -97,17 +97,23 @@ class DeletePlayer(DeleteView):
 
 
 def report_player(request, pk):
-    # domain = Site.objects.get_current().domain
-    # print('dfjkjnfdlfdk')
-    # print(request.get_host())
-    # print('dfjkjnfdlfdk')
+    print('fdkjhjfhdlkl')
+    host = request.get_host()
+    print(host)
     template = get_template('reports/players/by_player.html')
-    html = template.render({})
-    pdfkit.from_string(html, 'out.pdf')
-    pdf = open("out.pdf")
-    response = HttpResponse(pdf.read(), content_type='application/pdf')  # Generates the response as pdf response.
-    response['Content-Disposition'] = 'attachment; filename=output.pdf'
-    pdf.close()
-    os.remove("out.pdf")  # remove the locally created pdf file.
+    print('fdkjfn', template)
+    html = template.render()
+    print('fdkjfnwwwwwwwwww', html)
+
+    pdf = pdfkit.from_string(html, 'fvl.pdf')
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="ourcodeworld.pdf"'
+
     return response  # returns the response.
 
+def test_report(request):
+
+    return render(request, 'reports/players/by_player.html', {})
+
+def send_email(request):
+    pass

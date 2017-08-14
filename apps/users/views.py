@@ -29,14 +29,14 @@ def edit(request, id):
 
     if request.method == 'POST':
         first_name = request.POST["first_name"]
-        last_name  = request.POST["last_name"]
-        username   = request.POST["username"]
-        email      = request.POST["email"]
+        last_name = request.POST["last_name"]
+        username = request.POST["username"]
+        email = request.POST["email"]
 
         user.first_name = first_name
-        user.last_name  = last_name
-        user.username   = username
-        user.email      = email
+        user.last_name = last_name
+        user.username = username
+        user.email = email
 
         user.save()
 
